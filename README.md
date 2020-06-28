@@ -12,20 +12,20 @@
 
 2. git clone
 
-   1. git clone git@github.com:kmsandbox/soccer-stats.git
+   - git clone git@github.com:kmsandbox/soccer-stats.git
 
 3. inventory.ini 변경
 
-   1. cd soccer-stats/provision
+   - cd soccer-stats/provision
 
-   2. vi inventory.init
+   - vi inventory.init
 
-   3. 대상 앱 서버의 FQDN과 IP 입력
+   - 대상 앱 서버의 FQDN과 IP 입력
 
-      1. [app_server]
-         appserver-1.alm.ibm.com ansible_host=172.16.190.73 ansible_connection=ssh  ansible_port=22 ansible_user=jenkins
+      - [app_server]
+         appserver-1 ansible_host=172.16.190.73 ansible_connection=ssh  ansible_port=22 ansible_user=jenkins
 
-   4. git push
+   - git push
 
       git status
 
@@ -159,7 +159,7 @@ host_key_checking=False
 4. General > "이 빌드는 매개변수가 있습니다" 체크 > 매개변수 추가 > String Parameter > 아래 매개변수 모두 입력
 
    - FULL_BUILD : true
-   - HOST_PROVISION : appserver-1.alm.ibm.com
+   - HOST_PROVISION : appserver-1
    - GIT_URL : https://github.com/jeongkm/soccer-stats.git
    - NEXUS_URL : nexus-1.alm.ibm.com:8081
 5. Pipeline 섹션
