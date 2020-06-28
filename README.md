@@ -2,6 +2,12 @@
 
 
 
+## 사전 작업
+
+- ALM VM 준비 : https://github.com/jeongkm/alm-infra
+
+
+
 ## Ansible Playbook - Inventory 파일 업데이트
 
 
@@ -176,13 +182,24 @@ host_key_checking=False
 
 1. Jenkins pipeline : alm-pipeline 열기
 2. Build with Parameters > 빌드하기
-3. 
+3. Console Output 확인 
+4. Approval 단계에서 Proceed 선택
+5. 앱 배포 완료 확인
+
+
+
+## 앱 배포 결과 확인
+
+
+
+URL : http://appserver-1.alm.ibm.com:8080/matches/juventus/milan
 
 
 
 ---
+---
 
-
+# 원본
 
 Soccer Stats is an example application to be used as a proof of concept for a presentation at [Ansible Meetup in São Paulo](https://www.meetup.com/Ansible-Sao-Paulo/events/243212921/).
 
@@ -214,68 +231,5 @@ To bring a specific match, try the endpoint `http://localhost:8080/matches/{home
 ## Credits
 
 [Football-Data](http://www.football-data.co.uk/) for providing the data used for this lab.
-
-## Setup
-
-### Jenkins Pipeline Configuration
-
-Pipeline -> Configuration -> General > 이 빌드는 매개변수가 있습니다
-- FULL_BUILD : true
-- HOST_PROVISION : alm-appserver1.fyre.ibm.com
-- GIT_URL : https://github.com/<your ORG name>/soccer-stats.git
-- NEXUS_URL : alm-nexus1.fyre.ibm.com:8081
-
-### Jenkins System 
-
-#### Global Tool Configuration
-
-- SonarQube Scanner : Name - sonar
-- Maven installations : Name - m3
-
-#### Plugin
-
-- Maven Integration plugin
-
-#### Credentials
-
-- ssh-jenkins : jenkins@app-server private-key
-  - https://blog.asamaru.net/2016/01/26/ssh-login-without-password/
-- nexus : id/password
-- sonarqube api token 
-
-#### System Setting
-
-- SonarQube servers : Name - sonar, URL - http://alm-sonarqube1.fyre.ibm.com:9000, Server authentication token
-
-#### URL
-
-http://alm-appserver1.fyre.ibm.com:8080/matches/juventus/milan
-
-
-
-## 구분
-
-1. VM 환경 준비
-2. 파이프라인 설치
-
-
-
-ansible-playbook --list-hosts playbook.yml
-ansible-playbook --check playbook.yml
-
-mkdir /opt/sonarqube/sonarqube-8.3.1.34397/extensions/plugins
-touch /opt/sonarqube/sonarqube-8.3.1.34397/logs/web.log
-touch /opt/sonarqube/sonarqube-8.3.1.34397/logs/sonar.log
-
-chown sonar:sonar /opt/sonarqube/sonarqube-8.3.1.34397/extensions/plugins
-chown sonar:sonar /opt/sonarqube/sonarqube-8.3.1.34397/logs/web.log
-chown sonar:sonar /opt/sonarqube/sonarqube-8.3.1.34397/logs/sonar.log
-
-chown sonar:sonar *.jar
-
-
-## 
-
-
 
 
